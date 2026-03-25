@@ -1,0 +1,125 @@
+.project-summary-container {
+  background-color: #f3ede6;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.summary-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.summary-filters {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-btn {
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.chevron {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid #1a1a1a;
+  border-bottom: 1.5px solid #1a1a1a;
+  transform: rotate(45deg);
+  margin-bottom: 3px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.summary-table th {
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.summary-table td {
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  vertical-align: middle;
+}
+
+.project-name-link {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.project-name-link:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-completed { background-color: #dcfce7; color: #166534; }
+.status-ongoing { background-color: #ffedd5; color: #c2410c; }
+.status-atrisk { background-color: #fee2e2; color: #b91c1c; }
+.status-draft { background-color: #f3f4f6; color: #4b5563; }
+
+.circular-progress {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color) var(--progress), #e5e5e5 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  position: relative;
+}
+
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background-color: #f3ede6;
+  border-radius: 50%;
+}
+
+.circular-progress span {
+  position: relative;
+  z-index: 1;
+}

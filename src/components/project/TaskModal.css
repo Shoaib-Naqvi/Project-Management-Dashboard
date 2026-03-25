@@ -1,0 +1,121 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content-refined {
+  background-color: white;
+  width: 500px;
+  max-width: 90%;
+  border-radius: var(--radius);
+  line-height: 1.5;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header-refined {
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header-refined h2 {
+  font-family: var(--heading);
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-h);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-form {
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-h);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modern-input-field, .modern-textarea, .modern-select {
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background-color: #F8F9FA;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+  color: var(--text-h);
+}
+
+.modern-input-field:focus, .modern-textarea:focus, .modern-select:focus {
+  border-color: var(--accent);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(241, 90, 41, 0.1);
+}
+
+.modern-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.modal-footer-refined {
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

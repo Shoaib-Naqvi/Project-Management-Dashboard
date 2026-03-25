@@ -1,0 +1,99 @@
+.project-card-refined {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.project-card-refined:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  border-color: rgba(241, 90, 41, 0.1);
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #FFF2EB;
+  color: var(--accent);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.project-delete-btn {
+  background: none;
+  border: none;
+  color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.project-delete-btn:hover {
+  color: #D93025;
+}
+
+.project-title-refined {
+  font-family: var(--heading);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.project-tasks-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.3);
+  margin-top: 4px;
+}
+
+.project-card-footer-refined {
+  margin-top: 10px;
+}
+
+.project-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.progress-percent {
+  color: var(--accent);
+}
+
+
+.project-progress-bg {
+  height: 8px;
+  background-color: #F1EFE9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.project-progress-bar {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
