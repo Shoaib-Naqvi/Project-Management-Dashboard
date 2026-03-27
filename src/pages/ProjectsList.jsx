@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import { useProjectStore } from "../hooks/useProjectStore";
 import Button from "../components/common/Button";
 import ProjectCard from "../components/project/ProjectCard";
-import "../components/project/ProjectCard.css";
-import { useState } from "react";
 import ConfirmationModal from "../components/common/ConfirmationModal";
+import Input from "../components/common/Input";
+import ProjectModal from "../components/project/ProjectModal";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ProjectsList() {
-  const { projects, addProject, deleteProject, searchQuery  } = useProjectStore();
+  const { projects, addProject, deleteProject, updateProject, searchQuery  } = useProjectStore();
   const [newProjectTitle, setNewProjectTitle] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState(null);
   const [projectToDelete, setProjectToDelete] = useState(null);
 
   const filteredProjects = projects.filter(p => 
@@ -19,13 +22,27 @@ export default function ProjectsList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newProjectTitle.trim()) return;
-    addProject(newProjectTitle);
-    toast.success(`Project "${newProjectTitle}" created successfully`);
-    setNewProjectTitle("");
+    setEditingProject(null);
+    setIsCreateModalOpen(true);
   };
 
-  const handleDeleteConfirm = () => {
+  const handleCreate = (projectData) => {
+    if (!projectData.title.trim()) return;
+    
+    if (editingProject) {
+      updateProject(editingProject.id, projectData);
+      toast.success(`Project "${projectData.title}" updated successfully`);
+    } else {
+      addProject(projectData);
+      toast.success(`Project "${projectData.title}" created successfully`);
+    }
+    
+    setNewProjectTitle("");
+    setEditingProject(null);
+    setIsCreateModalOpen(false);
+  };
+
+  const handleDelete = () => {
     if (projectToDelete) {
       deleteProject(projectToDelete.id);
       toast.success(`Project "${projectToDelete.title}" deleted successfully`);
@@ -41,7 +58,7 @@ export default function ProjectsList() {
           <p className="page-subtitle-refined">Manage and track your project implementations</p>
         </div>
         <form onSubmit={handleSubmit} className="add-project-form">
-          <input
+          <Input
             type="text"
             placeholder="Enter project name..."
             value={newProjectTitle}
@@ -68,9 +85,13 @@ export default function ProjectsList() {
           >
             <ProjectCard
               project={project}
+              onEdit={() => {
+                setEditingProject(project);
+                setIsCreateModalOpen(true);
+              }}
               onDelete={() => {
                 setProjectToDelete(project);
-                setIsModalOpen(true);
+                setIsDeleteModalOpen(true);
               }}
             />
           </Link>
@@ -78,11 +99,22 @@ export default function ProjectsList() {
       </div>
 
       <ConfirmationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={handleDeleteConfirm}
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDelete}
         title="Delete Project"
         message={`Are you sure you want to delete "${projectToDelete?.title}"? This will also remove the inside ${projectToDelete?.tasks?.length || 0} tasks.`}
+      />
+
+      <ProjectModal
+        isOpen={isCreateModalOpen}
+        onClose={() => {
+          setIsCreateModalOpen(false);
+          setEditingProject(null);
+        }}
+        onSave={handleCreate}
+        initialTitle={newProjectTitle}
+        initialData={editingProject}
       />
     </div>
   );

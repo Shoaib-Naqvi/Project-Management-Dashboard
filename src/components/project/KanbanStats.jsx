@@ -17,7 +17,7 @@ const KanbanStats = ({ tasks }) => {
     <div className="kanban-stats-refined">
       <div className="stat-card-refined">
         <div className="stat-icon-wrapper total">
-          <ProjectIcon size={24} />
+          <ProjectIcon size={24}  />
         </div>
         <div className="stat-content">
           <span className="stat-value-refined">{stats.total}</span>

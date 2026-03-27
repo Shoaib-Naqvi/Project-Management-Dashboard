@@ -1,5 +1,6 @@
 import { useProjectStore } from '../../hooks/useProjectStore';
 import { SearchIcon } from './Icons';
+import Input from './Input';
 
 export default function Navbar() {
   const { searchQuery, setSearchQuery } = useProjectStore();
@@ -8,11 +9,12 @@ export default function Navbar() {
     <header className="main-header">
       <div className="header-search">
         <SearchIcon />
-        <input
+        <Input
           type="text"
           placeholder="Search projects or tasks..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          className="navbar-search-input"
         />
       </div>
       <div className="header-profile">

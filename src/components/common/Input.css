@@ -1,0 +1,29 @@
+.common-input {
+  width: 100%;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.common-input::placeholder {
+  color: #9ca3af;
+}
+
+.common-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(241, 90, 41, 0.1);
+}
+.navbar-search-input:focus {
+  box-shadow: none;
+}
+
+textarea.common-input {
+  resize: vertical;
+  min-height: 80px;
+}

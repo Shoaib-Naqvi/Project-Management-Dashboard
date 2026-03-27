@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   DndContext,
   closestCorners,
@@ -6,9 +6,12 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import KanbanColumn from "./KanbanColumn";
+import KanbanCard from "./KanbanCard";
 import "./Kanban.css";
 
 const KanbanBoard = ({
@@ -37,7 +40,18 @@ const KanbanBoard = ({
     };
   }, [tasks]);
 
+  const [activeId, setActiveId] = useState(null);
+
+  const handleDragStart = (event) => {
+    setActiveId(event.active.id);
+  };
+
+  const handleDragCancel = () => {
+    setActiveId(null);
+  };
+
   const handleDragEnd = (event) => {
+    setActiveId(null);
     const { active, over } = event;
     const activeId = active.id;
     const overId = over?.id;
@@ -52,11 +66,18 @@ const KanbanBoard = ({
     }
   };
 
+  const activeTask = useMemo(() => {
+    if (!activeId) return null;
+    return tasks.find(t => t.id === activeId);
+  }, [activeId, tasks]);
+
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={closestCorners}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
     >
       <div className="kanban-board">
         <KanbanColumn
@@ -87,6 +108,18 @@ const KanbanBoard = ({
           onDeleteTask={onDeleteTask}
         />
       </div>
+
+      <DragOverlay
+        dropAnimation={{
+          sideEffects: defaultDropAnimationSideEffects({
+            styles: { active: { opacity: "0.4" } },
+          }),
+        }}
+      >
+        {activeTask ? (
+          <KanbanCard task={activeTask} isOverlay />
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 };

@@ -79,6 +79,12 @@ p {
 }
 
 /* Form */
+.add-project-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .modern-input {
   padding: 14px 24px;
   border-radius: 50px;
@@ -87,7 +93,7 @@ p {
   box-shadow: var(--shadow);
   outline: none;
   font-size: 15px;
-  width: 250px;
+  min-width: 290px;
   transition: all 0.2s ease;
 }
 
@@ -97,9 +103,10 @@ p {
 
 .pill-btn {
   border-radius: 50px !important;
-  padding: 14px 28px !important;
+  padding: 15px 28px !important;
   font-weight: 700 !important;
   box-shadow: 0 4px 12px rgba(241, 90, 41, 0.2) !important;
+  white-space: nowrap !important;
 }
 
 .projects-grid {

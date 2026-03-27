@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from '../common/Button';
+import Input from '../common/Input';
 import './TaskModal.css';
 
 const TaskModal = ({ isOpen, onClose, onSave, initialData, defaultStatus }) => {
@@ -38,23 +39,22 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData, defaultStatus }) => {
         <form onSubmit={handleSubmit} className="modal-form">
           <div className="form-group">
             <label>Task Title</label>
-            <input 
+            <Input 
               type="text" 
               placeholder="What needs to be done?" 
               value={formData.title}
               onChange={e => setFormData({...formData, title: e.target.value})}
               required
-              className="modern-input-field"
             />
           </div>
 
           <div className="form-group">
             <label>Description</label>
-            <textarea 
+            <Input 
+              multiline
               placeholder="Add more details..." 
               value={formData.description}
               onChange={e => setFormData({...formData, description: e.target.value})}
-              className="modern-textarea"
             />
           </div>
 
@@ -88,11 +88,10 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData, defaultStatus }) => {
 
           <div className="form-group">
             <label>Due Date</label>
-            <input 
+            <Input 
               type="date"
               value={formData.dueDate}
               onChange={e => setFormData({...formData, dueDate: e.target.value})}
-              className="modern-input-field"
             />
           </div>
 

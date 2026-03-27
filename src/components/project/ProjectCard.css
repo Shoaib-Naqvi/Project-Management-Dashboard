@@ -12,9 +12,9 @@
 }
 
 .project-card-refined:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-  border-color: rgba(241, 90, 41, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: rgba(241, 91, 41, 0.24);
 }
 
 .project-card-header {
@@ -26,7 +26,7 @@
 .project-icon {
   width: 48px;
   height: 48px;
-  background-color: #FFF2EB;
+  background-color: #fff2eb;
   color: var(--accent);
   border-radius: 14px;
   display: flex;
@@ -39,16 +39,52 @@
   height: 20px;
 }
 
-.project-delete-btn {
-  background: none;
-  border: none;
-  color: rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: color 0.2s;
+.project-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
+.project-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.project-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.project-edit-btn,
+.project-delete-btn {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.project-edit-btn {
+  color: rgba(0, 0, 0, 0.4);
+}
+.project-edit-btn:hover {
+  background: #f9f9f9;
+  color: var(--accent);
+}
+
+.project-delete-btn {
+  color: rgba(0, 0, 0, 0.4);
+}
 .project-delete-btn:hover {
-  color: #D93025;
+  background: #f9f9f9;
+  color: #d93025;
 }
 
 .project-title-refined {
@@ -62,8 +98,35 @@
 .project-tasks-count {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(0,0,0,0.3);
-  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.project-description-clamped {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-top: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.project-due-date {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .project-card-footer-refined {
@@ -83,10 +146,9 @@
   color: var(--accent);
 }
 
-
 .project-progress-bg {
   height: 8px;
-  background-color: #F1EFE9;
+  background-color: #f1efe9;
   border-radius: 4px;
   overflow: hidden;
 }

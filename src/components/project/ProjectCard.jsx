@@ -1,6 +1,18 @@
-import { ProjectIcon, TrashIcon } from "../common/Icons";
+import {
+  ProjectIcon,
+  TrashIcon,
+  EditIcon,
+  CalendarIcon,
+} from "../common/Icons";
 
-const ProjectCard = ({ project, onDelete }) => {
+const ProjectCard = ({ project, onEdit, onDelete }) => {
+  const {
+    status = "not-started",
+    priority = "low",
+    dueDate = "",
+    description = "",
+  } = project;
+
   const completion =
     project.tasks?.length > 0
       ? Math.round(
@@ -13,26 +25,62 @@ const ProjectCard = ({ project, onDelete }) => {
   return (
     <div className="project-card-refined">
       <div className="project-card-header">
-        <div className="project-icon">
-          <ProjectIcon size={24} />
+        <div className="project-header-left">
+          <div className="project-icon">
+            <ProjectIcon size={24} />
+          </div>
+          <div className="project-badges">
+            <div
+              className={`status-badge status-${status.replace(/\s+/g, "-")}`}
+            >
+              {status.replace("-", " ")}
+            </div>
+            <div className="priority-badge">{priority.toUpperCase()}</div>
+          </div>
         </div>
-        <button
-          className="project-delete-btn"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onDelete();
-          }}
-        >
-          <TrashIcon size={18} strokeWidth={2} />
-        </button>
+        <div className="project-actions">
+          <button
+            className="project-edit-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onEdit();
+            }}
+            title="Edit Project"
+          >
+            <EditIcon size={18} strokeWidth={2} />
+          </button>
+          <button
+            className="project-delete-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onDelete();
+            }}
+            title="Delete Project"
+          >
+            <TrashIcon size={18} strokeWidth={2} />
+          </button>
+        </div>
       </div>
 
       <div className="project-card-body">
         <h3 className="project-title-refined">{project.title}</h3>
-        <p className="project-tasks-count">
-          {project.tasks?.length || 0} Tasks
-        </p>
+        {description && (
+          <p className="project-description-clamped">{description}</p>
+        )}
+
+        <div className="project-meta-info">
+          <p className="project-tasks-count">
+            {project.tasks?.length || 0} Tasks
+          </p>
+          {dueDate && (
+            <div className="project-due-date">
+              <CalendarIcon size={14} />
+              {dueDate}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="project-card-footer-refined">

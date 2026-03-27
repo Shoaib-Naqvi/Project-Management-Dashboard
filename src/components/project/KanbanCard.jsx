@@ -2,9 +2,9 @@ import { memo } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import "./Kanban.css";
-import { CalendarIcon, TrashIcon } from "../common/Icons";
+import { CalendarIcon, TrashIcon, EditIcon } from "../common/Icons";
 
-const KanbanCard = memo(({ task, onClick, onDelete }) => {
+const KanbanCard = memo(({ task, onClick, onDelete, isOverlay }) => {
   const { id, title, description, priority, dueDate, assignee, status } = task;
 
   const {
@@ -19,15 +19,15 @@ const KanbanCard = memo(({ task, onClick, onDelete }) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 2000 : 1,
+    opacity: isDragging && !isOverlay ? 0.3 : 1,
+    zIndex: isDragging ? 1 : 1,
   };
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`kanban-card ${isDragging ? "dragging" : ""}`}
-      onClick={onClick}
+      className={`kanban-card ${isOverlay ? "dragging" : ""}`}
       {...attributes}
       {...listeners}
     >
@@ -72,6 +72,16 @@ const KanbanCard = memo(({ task, onClick, onDelete }) => {
       </div>
 
       <div className="kanban-card-actions">
+        <button
+          className="edit-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick();
+          }}
+          title="Edit Task"
+        >
+          <EditIcon size={16} strokeWidth={2} />
+        </button>
         <button
           className="delete-btn"
           onClick={(e) => {

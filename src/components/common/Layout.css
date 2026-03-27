@@ -48,6 +48,7 @@
   font-size: 14px;
   width: 100%;
   color: var(--text-h);
+  padding: 0;
 }
 
 .header-profile {

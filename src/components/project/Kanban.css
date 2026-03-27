@@ -126,14 +126,29 @@
   letter-spacing: 0.5px;
 }
 
-.status-todo { background-color: #FEEBEB; color: #D93025; }
-.status-in-progress { background-color: #FFF7E6; color: #FF9900; }
-.status-done { background-color: #E6F4EA; color: #1E8E3E; }
+.status-todo,
+.status-not-started {
+  background-color: #feebeb;
+  color: #d93025;
+}
+.status-in-progress {
+  background-color: #fff7e6;
+  color: #ff9900;
+}
+.status-on-hold{
+  background-color: #f3f3f3;
+  color: rgb(145, 143, 143);
+}
+.status-done,
+.status-completed {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+}
 
 .priority-badge {
   font-size: 10px;
   font-weight: 600;
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .kanban-card-title {
@@ -167,7 +182,7 @@
 .progress-bg {
   flex: 1;
   height: 6px;
-  background-color: #F1EFE9;
+  background-color: #f1efe9;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -190,7 +205,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 8px;
-  border-top: 1px solid rgba(0,0,0,0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
 }
 .kanban-stats-refined {
   display: flex;
@@ -223,9 +238,18 @@
   height: 24px;
 }
 
-.stat-icon-wrapper.total { background-color: #EBF2FF; color: #4D89FF; }
-.stat-icon-wrapper.in-progress { background-color: #FFF2EB; color: #FF8A4D; }
-.stat-icon-wrapper.completion { background-color: #E6F4EA; color: #1E8E3E; }
+.stat-icon-wrapper.total {
+  background-color: #ebf2ff;
+  color: #4d89ff;
+}
+.stat-icon-wrapper.in-progress {
+  background-color: #fff2eb;
+  color: #ff8a4d;
+}
+.stat-icon-wrapper.completion {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+}
 
 .stat-content {
   display: flex;
@@ -243,7 +267,7 @@
 .stat-label-refined {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
   margin-top: 4px;
 }
 
@@ -270,7 +294,7 @@
 .card-date {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -278,20 +302,45 @@
 
 .kanban-card-actions {
   position: absolute;
-  top: 24px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
   opacity: 0;
   transition: opacity 0.2s;
+  z-index: 10;
 }
 
 .kanban-card:hover .kanban-card-actions {
   opacity: 1;
 }
 
+.edit-btn,
 .delete-btn {
-  background: none;
-  border: none;
-  color: #D93025;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  color: #4a4a4a;
+}
+.edit-btn:hover {
+  background: #f9f9f9;
+  color: var(--accent);
+}
+
+.delete-btn {
+  color: #d93025;
+}
+.delete-btn:hover {
+  background: #f9f9f9;
+  color: #b32015;
 }

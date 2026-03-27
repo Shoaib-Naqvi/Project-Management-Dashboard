@@ -6,6 +6,7 @@ import "../components/project/ProjectCard.css";
 import ProjectSummaryTable from "../components/project/ProjectSummaryTable";
 import TodayTasksList from "../components/project/TodayTasksList";
 import ConfirmationModal from "../components/common/ConfirmationModal";
+import ProjectModal from "../components/project/ProjectModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,9 +14,12 @@ export default function Dashboard() {
   const projects = useProjectStore((state) => state.projects);
   const searchQuery = useProjectStore((state) => state.searchQuery);
   const deleteProject = useProjectStore((state) => state.deleteProject);
+  const updateProject = useProjectStore((state) => state.updateProject);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState(null);
 
   const filteredProjects = projects.filter((p) =>
     p.title.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -30,6 +34,16 @@ export default function Dashboard() {
       toast.success(`Project "${projectToDelete.title}" deleted successfully`);
       setProjectToDelete(null);
     }
+  };
+
+  const handleUpdateProject = (projectData) => {
+    if (!projectData.title?.trim()) return;
+    if (editingProject) {
+      updateProject(editingProject.id, projectData);
+      toast.success(`Project "${projectData.title}" updated successfully`);
+    }
+    setEditingProject(null);
+    setIsUpdateModalOpen(false);
   };
 
   return (
@@ -70,6 +84,11 @@ export default function Dashboard() {
               >
                 <ProjectCard
                   project={project}
+                  onEdit={(e) => {
+                    if (e) e.preventDefault();
+                    setEditingProject(project);
+                    setIsUpdateModalOpen(true);
+                  }}
                   onDelete={() => {
                     setProjectToDelete(project);
                     setIsModalOpen(true);
@@ -92,6 +111,16 @@ export default function Dashboard() {
         onConfirm={handleDeleteConfirm}
         title="Delete Project"
         message={`Are you sure you want to delete "${projectToDelete?.title}"? This will also remove the inside ${projectToDelete?.tasks?.length || 0} tasks.`}
+      />
+
+      <ProjectModal
+        isOpen={isUpdateModalOpen}
+        onClose={() => {
+          setIsUpdateModalOpen(false);
+          setEditingProject(null);
+        }}
+        onSave={handleUpdateProject}
+        initialData={editingProject}
       />
     </div>
   );
