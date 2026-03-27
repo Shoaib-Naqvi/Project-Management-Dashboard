@@ -14,12 +14,15 @@ export default function ProjectDetails() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [initialStatus, setInitialStatus] = useState("todo");
-  
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
 
   const projects = useProjectStore((state) => state.projects);
-  const project = useMemo(() => projects.find((p) => p.id === projectId), [projects, projectId]);
+  const project = useMemo(
+    () => projects.find((p) => p.id === projectId),
+    [projects, projectId],
+  );
 
   const addTask = useProjectStore((state) => state.addTask);
   const editTask = useProjectStore((state) => state.editTask);
@@ -28,7 +31,7 @@ export default function ProjectDetails() {
 
   const handleOpenAddModal = useCallback((status = "todo") => {
     setEditingTask(null);
-    setInitialStatus(typeof status === 'string' ? status : "todo");
+    setInitialStatus(typeof status === "string" ? status : "todo");
     setIsModalOpen(true);
   }, []);
 
@@ -37,9 +40,12 @@ export default function ProjectDetails() {
     setIsModalOpen(true);
   }, []);
 
-  const handleTaskMove = useCallback((taskId, newStatus) => {
-    updateTaskStatus(projectId, taskId, newStatus);
-  }, [projectId, updateTaskStatus]);
+  const handleTaskMove = useCallback(
+    (taskId, newStatus) => {
+      updateTaskStatus(projectId, taskId, newStatus);
+    },
+    [projectId, updateTaskStatus],
+  );
 
   const handleSaveTask = (taskData) => {
     if (editingTask) {
@@ -72,11 +78,13 @@ export default function ProjectDetails() {
       <header className="page-header-refined">
         <div>
           <h1 className="page-title-refined">{project.title}</h1>
-          <p className="page-subtitle-refined">Manage tasks and track progress for this project</p>
+          <p className="page-subtitle-refined">
+            Manage tasks and track progress for this project
+          </p>
         </div>
         <div className="header-actions">
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             onClick={() => handleOpenAddModal("todo")}
             className="pill-btn"
           >

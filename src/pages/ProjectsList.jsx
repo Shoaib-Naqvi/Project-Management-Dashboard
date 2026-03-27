@@ -9,15 +9,16 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ProjectsList() {
-  const { projects, addProject, deleteProject, updateProject, searchQuery  } = useProjectStore();
+  const { projects, addProject, deleteProject, updateProject, searchQuery } =
+    useProjectStore();
   const [newProjectTitle, setNewProjectTitle] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [projectToDelete, setProjectToDelete] = useState(null);
 
-  const filteredProjects = projects.filter(p => 
-    p.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProjects = projects.filter((p) =>
+    p.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleSubmit = (e) => {
@@ -28,7 +29,7 @@ export default function ProjectsList() {
 
   const handleCreate = (projectData) => {
     if (!projectData.title.trim()) return;
-    
+
     if (editingProject) {
       updateProject(editingProject.id, projectData);
       toast.success(`Project "${projectData.title}" updated successfully`);
@@ -36,7 +37,7 @@ export default function ProjectsList() {
       addProject(projectData);
       toast.success(`Project "${projectData.title}" created successfully`);
     }
-    
+
     setNewProjectTitle("");
     setEditingProject(null);
     setIsCreateModalOpen(false);
@@ -55,7 +56,9 @@ export default function ProjectsList() {
       <header className="page-header-refined">
         <div>
           <h1 className="page-title-refined">Your Projects</h1>
-          <p className="page-subtitle-refined">Manage and track your project implementations</p>
+          <p className="page-subtitle-refined">
+            Manage and track your project implementations
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="add-project-form">
           <Input
@@ -74,7 +77,11 @@ export default function ProjectsList() {
       <div className="projects-grid">
         {filteredProjects.length === 0 && (
           <div className="empty-state">
-            <p>{searchQuery ? `No projects matching "${searchQuery}"` : "No projects yet. Start by creating one above!"}</p>
+            <p>
+              {searchQuery
+                ? `No projects matching "${searchQuery}"`
+                : "No projects yet. Start by creating one above!"}
+            </p>
           </div>
         )}
         {filteredProjects.map((project) => (
