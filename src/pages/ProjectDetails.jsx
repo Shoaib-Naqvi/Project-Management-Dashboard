@@ -1,10 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProjectStore } from "../hooks/useProjectStore";
 import { useMemo, useState, useCallback } from "react";
-import KanbanBoard from "../components/project/KanbanBoard";
-import KanbanStats from "../components/project/KanbanStats";
+import KanbanBoard from "../components/main/KanbanBoard";
+import KanbanStats from "../components/main/KanbanStats";
 import Button from "../components/common/Button";
-import TaskModal from "../components/project/TaskModal";
+import TaskModal from "../components/main/TaskModal";
 import ConfirmationModal from "../components/common/ConfirmationModal";
 import toast from "react-hot-toast";
 

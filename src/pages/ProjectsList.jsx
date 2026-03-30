@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useProjectStore } from "../hooks/useProjectStore";
 import Button from "../components/common/Button";
-import ProjectCard from "../components/project/ProjectCard";
+import ProjectCard from "../components/main/ProjectCard";
 import ConfirmationModal from "../components/common/ConfirmationModal";
 import Input from "../components/common/Input";
-import ProjectModal from "../components/project/ProjectModal";
+import ProjectModal from "../components/main/ProjectModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
 

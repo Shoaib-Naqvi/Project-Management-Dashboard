@@ -1,12 +1,12 @@
 import { useProjectStore } from "../hooks/useProjectStore";
-import KanbanStats from "../components/project/KanbanStats";
+import KanbanStats from "../components/main/KanbanStats";
 import { Link } from "react-router-dom";
-import ProjectCard from "../components/project/ProjectCard";
-import "../components/project/ProjectCard.css";
-import ProjectSummaryTable from "../components/project/ProjectSummaryTable";
-import TodayTasksList from "../components/project/TodayTasksList";
+import ProjectCard from "../components/main/ProjectCard";
+import "../components/main/ProjectCard.css";
+import ProjectSummaryTable from "../components/main/ProjectSummaryTable";
+import TodayTasksList from "../components/main/TodayTasksList";
 import ConfirmationModal from "../components/common/ConfirmationModal";
-import ProjectModal from "../components/project/ProjectModal";
+import ProjectModal from "../components/main/ProjectModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
